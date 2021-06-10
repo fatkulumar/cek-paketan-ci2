@@ -120,16 +120,15 @@
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/ -->
-          Designed by <a href="https://fatkulumar.com/">fatkulumar</a>
+          Designed by <a href="https://www.ponpesgasek.id/">Gasek Multimedia</a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="https://twitter.com/fatkul_umar" class="twitter bg-success" target="_blank"><i class="bx bxl-twitter"></i></a>
-        <a href="https://facebook.com/fatkulumar.rezpector" class="facebook bg-success" target="_blank"><i class="bx bxl-facebook"></i></a>
-        <a href="https://instagram.com/fatkulumar" class="instagram bg-success" target="_blank"><i class="bx bxl-instagram"></i></a>
-        <a href="https://fatkulumar.wordpress.com/" class="google-plus bg-success" target="_blank"><i class="bx bxl-wordpress"></i></a>
-        <a href="https://linkedin.com/in/fatkulumar" class="linkedin bg-success" target="_blank"><i class="bx bxl-linkedin"></i></a>
-        <a href="https://fatkulumar.com/" class="linkedin bg-success" target="_blank"><i class="bx bxl-"></i></a>
+        <a href="https://twitter.com/ponpesgasek/" class="twitter bg-success" target="_blank"><i class="bx bxl-twitter"></i></a>
+        <a href="https://facebook.com/ponpesgasek/" class="facebook bg-success" target="_blank"><i class="bx bxl-facebook"></i></a>
+        <a href="https://instagram.com/ponpesgasek/" class="instagram bg-success" target="_blank"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.youtube.com/c/PonpesgasekTV/" class="youtube bg-success" target="_blank"><i class="bx bxl-youtube"></i></a>
+        <a href="https://www.ponpesgasek.id/" class="home bg-success" target="_blank"><i class="bx bx-home-alt"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->

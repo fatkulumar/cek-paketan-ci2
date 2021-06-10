@@ -64,7 +64,7 @@
             type: "GET",
             dataType: 'JSON',
             success: function(data){
-                console.log(data)
+                // console.log(data)
                 dataku = data.selecLimitAllAjax
                 
                 $(dataku).each(function(i){

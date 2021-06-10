@@ -8,7 +8,7 @@
 
         var $column_order = array(null, 'nama_paket','tgl_terima','hp','penerima','jenis_kirim','status_ambil', 'tgl_ambil'); //set column field database for datatable orderable
         var $column_search = array('nama_paket','tgl_terima','hp','penerima','jenis_kirim','status_ambil', 'tgl_ambil'); //set column field database for datatable searchable 
-        var $order = array('id_paket' => 'asc'); // default order 
+        var $order = array('id_paket' => 'desc'); // default order 
 
         public function __construct()
         {
@@ -22,7 +22,7 @@
             ->order_by('id_paket','desc')
             ->get($this->table)->result_array();
         }
-
+ 
         function tampil_data_desc(){
             return $this->db
             ->select('id_paket,nama_paket,tgl_terima,penerima,jenis_kirim,status_ambil, tgl_ambil')

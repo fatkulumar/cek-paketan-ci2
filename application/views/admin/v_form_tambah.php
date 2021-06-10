@@ -95,14 +95,14 @@
   
   $('#no_hp').on('change', function() {
     var no_hp = $('#no_hp').val()
-    console.log(no_hp)
+    // console.log(no_hp)
     $.ajax({
       url: "<?= base_url('admin/filter_hp')?>",
       type: "POST",
       data: {no_hp: no_hp},
       dataType: "JSON",
       success: function(data) {
-        console.log(data)
+        // console.log(data)
         $('#nama_paket').val(data.nama_hp.nama_paket)
       }
     })
@@ -110,18 +110,35 @@
 
   $('#nama_paket').on('change', function() {
     var nama_paket = $('#nama_paket').val()
+    // $('#nama_paket').val("um")
     var panjang_awal = nama_paket.length - 15
     var panjang_akhir = nama_paket.length
+    // alert(panjang_akhir)
     var potong = nama_paket.substring(nama_paket, panjang_awal, panjang_akhir)
+    var cek1 = nama_paket.slice(panjang_awal+2)
+    var cek2 = nama_paket.slice(panjang_awal+1)
+    var ceks_number1 = parseInt(cek1)
+    var ceks_number2 = parseInt(cek2)
+    var isNumber1 = Number.isInteger(ceks_number1)
+    var isNumber2 = Number.isInteger(ceks_number2)
+    var notPaketNumber = nama_paket
+
+    if(!isNumber1){
+      $('#nama_paket').val(nama_paket)
+      return 0
+    }else if(!isNumber1){
+      alert("umar")
+    }
+    
     $('#nama_paket').val(potong)
-    console.log(nama_paket)
+    // console.log(nama_paket)
     $.ajax({
       url: "<?= base_url('admin/filter_nama_paket')?>",
       type: "POST",
       data: {nama_paket: potong},
       dataType: "JSON",
       success: function(data) {
-        console.log(data)
+        // console.log(data)
         $('#no_hp').val(data.nama_paket.hp)
       }
     })

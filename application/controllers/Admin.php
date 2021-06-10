@@ -66,7 +66,7 @@ class Admin extends CI_Controller {
 			'jml_paket' => $jml_paket,
 		];
 
-		$kirim_telegram = "Nama: " . $nama_paket . " dengan nomor hp " . $hp . " paketan sudah ada di Gasek Multimedia pada " .$tgl_terima. " harap segera di ambil karena gudang mau meledak. Terimakasih . info lain cek di simpas.gasekmultimedia.com Pesan ini di kirim otomatis oleh sistem karena anda sudah numpang paket di gasek multimedia";
+		$kirim_telegram = "Nama: " . $nama_paket . " dengan nomor hp " . $hp . " paketan sudah ada di Gasek Multimedia pada " .$tgl_terima. " harap segera di ambil karena gudang mau meledak. Terimakasih . info lain cek di https://www.ponpesgasek.id/ Pesan ini di kirim otomatis oleh sistem karena anda sudah numpang paket di gasek multimedia";
 
 		$this->m_paket->input_paket($data, 'tb_paket');
 		$data["id_akhir"] = $this->m_paket->idAkhir()->row_array();
