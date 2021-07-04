@@ -23,8 +23,9 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();		
 		$this->load->model('m_paket');
+		$this->load->model('m_belum');
 		$this->load->helper('url');
-		$this->load->model('M_paket','paket');
+		// $this->load->model('M_paket','paket');
 		// $this->load->library('form_validation');
 		date_default_timezone_set('Asia/Jakarta');
 	}
@@ -236,6 +237,46 @@ class Admin extends CI_Controller {
         echo json_encode($output);
 	}
 
+	public function ajax_list_belum() 
+    {
+        $list = $this->m_belum->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $paket) {
+            $no++;
+            $row = array();
+            // $row[] = $no;
+            $row[] = $paket->tgl_terima;
+            $row[] = $paket->nama_paket;
+            $row[] = $paket->hp;
+            $row[] = $paket->penerima;
+            $row[] = $paket->pengambil;
+			$row[] = $paket->jml_paket;
+            $row[] = $paket->jenis_kirim;
+			if($paket->status_ambil==''){
+
+				$btn_status="<td><a class='btn btn-danger btn-sm' onclick='modalPengambil($paket->id_paket)' href='void:0'>Belum Diambil</a></td>";
+			}else{
+
+				$btn_status="<button class='btn btn-success btn-sm' disabled>Sudah Diambil</button><div><span>$paket->tgl_ambil</span>";
+			}
+		$row[]=$btn_status;
+		$row[]= "<td><a class='btn btn-sm btn-danger' onclick='modalHapusPaket($paket->id_paket)' href='javascript:void(0)'><i class='fa fa-trash' aria-hidden='true'></i></a></td><td><a class='btn btn-sm btn-success' onclick='return confirm('Yakin Hapus $paket->nama_paket ?')' href='".base_url("admin/edit_data/$paket->id_paket")."'><i class='fa fa-edit' aria-hidden='true'></i></a></td>";
+
+
+            $data[] = $row;
+        }
+ 
+        $output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->m_belum->count_all(),
+			"recordsFiltered" => $this->m_belum->count_filtered(),
+			"data" => $data,
+		);
+        //output to json format
+        echo json_encode($output);
+	}
+
 	public function grafikNamaPaket($tahun)
 	{
 		header("Access-Control-Allow-Origin: *");
@@ -398,4 +439,22 @@ class Admin extends CI_Controller {
 		$data["selecLimitAllAjax"] = $this->m_paket->tampil_data_desc();
 		echo json_encode($data);
 	}
+
+	function table_belum_ambil() {
+		$data['nama_paket'] = $this->m_paket->grafikNamaPaket()->result_array();
+		$data['hitungCod'] = $this->m_paket->hitungCod();
+		$data['hitungLangsung'] = $this->m_paket->hitungLangsung();
+		// $data['penerima'] = $this->m_paket->grafikPenerima()-ray();
+
+		$data['data_asc'] = $this->m_paket->tampil_data_asc();
+		// $data['data_desc'] = $this->m_paket->tampil_data_desc();
+		$data['getWarning'] = $this->m_paket->getWarning();
+
+		$data['data_asc'] = $this->m_belum->tampil_data_asc();
+
+		
+
+		$this->load->view('admin/table_belum_ambil', $data);
+	}
 }
+

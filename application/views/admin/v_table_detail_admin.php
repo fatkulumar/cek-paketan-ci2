@@ -43,7 +43,7 @@
                                     <?php  
                                         if($dt['status_ambil'] == ""):
                                     ?>
-                                        <a class="btn btn-danger btn-sm" onclick="userInput(<?= $dt['id_paket'] ?>)" href="">Belum Diambil</a>
+                                         <a class="btn btn-danger btn-sm" onclick="userInput(<?= $dt['id_paket'] ?>)" href="">Belum Diambil</a>
                                     <?php else: ?>
                                         <button class="btn btn-success btn-sm" disabled>Sudah Diambil</button>
                                         <div>

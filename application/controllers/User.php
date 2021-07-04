@@ -151,11 +151,12 @@ class User extends CI_Controller {
             $row[] = $paket->nama_paket;
             $row[] = $paket->hp;
             $row[] = $paket->penerima;
+            $row[] = $paket->pengambil;
             $row[] = $paket->jml_paket;
             $row[] = $paket->jenis_kirim;
             if($paket->status_ambil==''){
 
-				$btn_status="<td><a class='btn btn-danger btn-sm' href='javascript:void(0)'>Belum Diambil</a></td>";
+				$btn_status="<td><a class='btn btn-danger btn-sm' onclick='modalPengambil($paket->id_paket)' href='javascript:void(0)'>Belum Diambil</a></td>";
 			}else{
 
 				$btn_status="<button class='btn btn-success btn-sm' disabled>Sudah Diambil</button><div><span>$paket->tgl_ambil</span>";

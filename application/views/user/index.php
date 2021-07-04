@@ -163,3 +163,27 @@
 </body>
 
 </html>
+
+<!-- modal ambil paket user -->
+    <!-- Modal Pengambil-->
+    <div class="modal fade" id="modalPengambil" role="dialog" aria-labelledby="modalPengambilLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPengambilLabel">Masukkan nama pengambil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="pengambil">Pengambil</label>
+                <input class="form-control" type="text" id="pengambil" name="pengambil">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closePengambil" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="savePengambil" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    </div>

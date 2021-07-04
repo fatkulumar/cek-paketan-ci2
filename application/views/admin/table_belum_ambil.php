@@ -72,7 +72,7 @@
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="acvtive"><a href="<?= base_url('admin') ?>">Home</a></li>
+            <li class="active"><a href="<?= base_url('admin') ?>">Home</a></li>
             <li><a href="<?= base_url('admin/grafik_pisah')?>">Grafik</a></li>
             <li><a href="<?= base_url('admin/table_belum_ambil')?>">Belum</a></li>
             <!-- <li class="get-started"><a href="#about">Get Started</a></li> -->
@@ -110,47 +110,155 @@
   </header><!-- End Header -->
 
 
-  <!-- ======= Hero Section ======= -->   
-  <section id="hero" class="align-items-center">
-    <div class="container position-relative" data-aos="fade-in" data-aos-delay="200">
-      <!-- include table  -->
+  
+    <!-- ======= Counts Section ======= -->
+    
+  <main id="hero">
+	
+    <!-- ======= About Section ======= -->
+    <section id="grafik" class="align-items-center">
+      <div class="container text-center">
+          
       <div class="row">
-        <div class="col-md-6 mb-5">
-          <?php $this->load->view('admin/v_form_tambah') ?>
-        </div> 
-        <div class="col-md-6">
-          <?php $this->load->view('admin/v_table_admin') ?>
+        <div class="col-md-12 mt-2">
+            <div class="card">
+                <div class="card-header bg-success">
+                    <strong>
+                        <!-- <h1 style="line-height: 0; padding-top: 30px;">SIMPAS LITE</h1>
+                        <h5 style="padding-top: 10px; color: white;">Sistem Informasi Paketan Gasek</h5> -->
+                        <img width="300px" src="<?= base_url('assets/img/logo-sympas-lite.png') ?>" alt="simpas">
+                    </strong>
+                </div> 
+                <div class="card-body">
+ 
+                    <div class="table table-responsive">   
+                      <!-- /.content-header -->
+                        <table id="table_resi_detail_admin_belum" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal Terima</th>
+                                    <th>Nama</th>
+                                    <th>HP</th>
+                                    <th>Penerima</th>
+                                    <th>Pengambil</th>
+                                    <th>Jumlah Paket</th>
+                                    <th>Jenis</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($data_asc as $dt): ?>
+                                <tr>
+                                    <td><?= $dt["tgl_terima"] ?></td>
+                                    <td><?= $dt["nama_paket"] ?></td>
+                                    <td><?= $dt["hp"] ?></td>
+                                    <td><?= $dt["penerima"] ?></td>
+                                    <td id="user_ambil"><?= $dt["pengambil"] ?></td>
+                                    <td><?= $dt["jml_paket"] ?></td>
+                                    <td><?= $dt["jenis_kirim"] ?></td>
+                                    <td>
+                                        <?php  
+                                            if($dt['status_ambil'] == ""):
+                                        ?>
+                                            <button class="btn btn-danger btn-sm" onclick="modalPengambil($dt['id_paket'])" href="">Belum Diambil</a>
+                                        <?php else: ?>
+                                            <button class="btn btn-success btn-sm" disabled>Sudah Diambil</button>
+                                            <div>
+                                                <span><?= $dt["tgl_ambil"] ?></span>
+                                            </div>
+                                        <?php endif ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>     
+                            </tbody>
+                        </table> 
+
+                    </div>
+                </div>
+           </div>
         </div>
-      </div> 
     </div>
-  </section><!-- End Hero -->
-	
-  <!-- <main> -->
-    <!-- ======= About Section ======= -->
-    <section id="table" class="align-items-center">
-      <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
-        <!-- include table  -->
-            <?php $this->load->view('admin/v_table_detail_admin') ?>
-      </div>
-    </section><!-- End Hero -->
-  <!-- <main> -->
 
+    <!-- Modal Pengambil-->
+    <div class="modal fade" id="modalPengambil" tabindex="-1" role="dialog" aria-labelledby="modalPengambilLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalPengambilLabel">Masukkan nama pengambil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label for="pengambil"><b>Pengambil</b></label>
+            <input class="form-control" type="text" id="pengambil" name="pengambil">
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="closePengambil" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="savePengambil" class="btn btn-primary">Save</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+                                            
+        <input type="hidden" id="tgl_ambil" value="<?= date('d-m-Y H:i:s')?>">
+
+        <script src="<?= base_url('assets/datatable/datatables/jquery.dataTables.js') ?>"></script>
+
+        <script>
+            var table_resi_detail_admin_belum = $('#table_resi_detail_admin_belum').DataTable(
+        {
+        "processing": true, 
+            "serverSide": true, 
+            // "order": [], //Initial no order.
+    
+            "ajax": {
+                "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/Admin/ajax_list_belum",
+                "type": "POST"
+            },
+            //Set column
+            // "columnDefs": [
+            // { 
+            //     "targets": [ 0 ], //first column / numbering column
+            //     "orderable": false, //set not orderable
+            // },
+            // ],
+        }
+        );
+
+        function modalPengambil(id) {
+        // alert(id)
+        var tgl_ambil = $('#tgl_ambil').val()
+        var modalPengambil = $('#modalPengambil').modal()
+        var save = $('#savePengambil').on('click', function(){
+            var pengambil = $('#pengambil').val()
+            $.ajax({
+                url: '<?= base_url('admin/updateNamaPengambil/') ?>' + id,
+                type: "POST",
+                dataType: 'JSON',
+                data: {pengambil: pengambil, id_paket: id, tgl_ambil: tgl_ambil},
+                success: function(res){
+                    //pemanggilan function untuk table paket bukan detail
+                    tampilPaketBukanDetail()
+                    $('#modalPengambil').modal('hide')
+                    $('#pengambilTd').html(res.pengambil)
+                    $("#pengambil").val("")
+                    table_resi_detail_admin_belum.ajax.reload(null, false);
+                }
+            })
+        //pemanggilan function untuk table paket bukan detail
+            tampilPaketBukanDetail()
+            })
+        }
+        </script>
+
+      </div>
+    </section><!-- End About Section -->
 
     <!-- ======= Counts Section ======= -->
     
-  <!-- <main id="main"> -->
-	
-    <!-- ======= About Section ======= -->
-    <!-- <section id="grafik" class="about">
-      <div class="container">
-      </div>
-    </section> -->
-    <!-- End About Section -->
-
-    <!-- ======= Counts Section ======= -->
-    
-  <!-- </main> -->
-  <!-- End #main -->
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -170,60 +278,14 @@
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="https://twitter.com/ponpesgasek/" class="twitter bg-success" target="_blank"><i class="bx bxl-twitter"></i></a>
+      <a href="https://twitter.com/ponpesgasek/" class="twitter bg-success" target="_blank"><i class="bx bxl-twitter"></i></a>
         <a href="https://facebook.com/ponpesgasek/" class="facebook bg-success" target="_blank"><i class="bx bxl-facebook"></i></a>
         <a href="https://instagram.com/ponpesgasek/" class="instagram bg-success" target="_blank"><i class="bx bxl-instagram"></i></a>
         <a href="https://www.youtube.com/c/PonpesgasekTV/" class="youtube bg-success" target="_blank"><i class="bx bxl-youtube"></i></a>
         <a href="https://www.ponpesgasek.id/" class="home bg-success" target="_blank"><i class="bx bx-home-alt"></i></a>
-        <!-- <a href="https://fatkulumar.wordpress.com/" class="google-plus bg-success" target="_blank"><i class="bx bxl-wordpress"></i></a> -->
-        <!-- <a href="https://linkedin.com/in/fatkulumar" class="linkedin bg-success" target="_blank"><i class="bx bxl-linkedin"></i></a> -->
-        <!-- <a href="https://fatkulumar.com/" class="linkedin bg-success" target="_blank"><i class="bx bxl-"></i></a> -->
       </div>
     </div> 
   </footer><!-- End Footer -->
-
-<!-- Modal Pengambil-->
-<div class="modal fade" id="modalPengambil" tabindex="-1" role="dialog" aria-labelledby="modalPengambilLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalPengambilLabel">Masukkan nama pengambil</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label for="pengambil">Pengambil</label>
-        <input class="form-control" type="text" id="pengambil" name="pengambil">
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="closePengambil" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="savePengambil" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal HapusPaket-->
-<div class="modal fade" id="modalHapusPaket" tabindex="-1" role="dialog" aria-labelledby="modalHapusPaketLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalHapusPaketLabel">Hapus?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div id="tampilNamaPaket"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="closeHapusPaket" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="saveHapusPaket" class="btn btn-primary">Hapus</button>
-      </div>
-    </div>
-  </div>
-</div>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -280,30 +342,7 @@
 // })
 
 
-// function modalPengambil(id) {
-//         // alert(id)
-//         var tgl_ambil = $('#tgl_ambil').val()
-//         var modalPengambil = $('#modalPengambil').modal()
-//         var save = $('#savePengambil').on('click', function(){
-//           var pengambil = $('#ppengambil').val()
-//           $.ajax({
-//                 url: '<?= base_url('admin/updateNamaPengambil/') ?>' + id,
-//                 type: "POST",
-//                 dataType: 'JSON',
-//                 data: {pengambil: pengambil, id_paket: id, tgl_ambil: tgl_ambil},
-//                 success: function(res){
-//                     console.log(res.pengambil)
-//                     $('#modalPengambil').modal('hide')
-//                     // table_resi_detail_admin.ajax.reload(null, false);
-//                 }
-//             })
-//         })
 
-//         var close = $('#closePengambil').on('click', function(){
-//             $('#modalPengambil').modal('hide')
-//             table_resi_detail_admin.ajax.reload(null, false);
-//         })
-//     }
 
   </script>
 
