@@ -16,6 +16,7 @@
                         <table id="table_resi_detail_admin" class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>Kode</th>
                                     <th>Tanggal Terima</th>
                                     <th>Nama</th>
                                     <th>HP</th>
@@ -32,6 +33,7 @@
                                 foreach($data_asc as $dt):
                             ?>
                             <tr>
+                                <td><?= $dt["id_paket"] ?></td>
                                 <td><?= date("d-m-Y H:i:s", strtotime($dt["tgl_terima"])) ?></td>
                                 <td><?= $dt["nama_paket"] ?></td>
                                 <td><?= $dt["hp"] ?></td>

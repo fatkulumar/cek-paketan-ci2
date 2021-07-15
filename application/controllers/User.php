@@ -147,6 +147,7 @@ class User extends CI_Controller {
         foreach ($list as $paket) {
             $no++;
             $row = array();
+            $row[] = $paket->id_paket;
             $row[] = $paket->tgl_terima;
             $row[] = $paket->nama_paket;
             $row[] = $paket->hp;

@@ -206,6 +206,7 @@ class Admin extends CI_Controller {
             $no++;
             $row = array();
             // $row[] = $no;
+            $row[] = $paket->id_paket;
             $row[] = $paket->tgl_terima;
             $row[] = $paket->nama_paket;
             $row[] = $paket->hp;
@@ -246,6 +247,7 @@ class Admin extends CI_Controller {
             $no++;
             $row = array();
             // $row[] = $no;
+            $row[] = $paket->id_paket;
             $row[] = $paket->tgl_terima;
             $row[] = $paket->nama_paket;
             $row[] = $paket->hp;

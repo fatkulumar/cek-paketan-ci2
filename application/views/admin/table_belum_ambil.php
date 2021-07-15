@@ -136,6 +136,7 @@
                         <table id="table_resi_detail_admin_belum" class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>Kode</th>
                                     <th>Tanggal Terima</th>
                                     <th>Nama</th>
                                     <th>HP</th>
@@ -149,6 +150,7 @@
                             <tbody>
                             <?php foreach($data_asc as $dt): ?>
                                 <tr>
+                                    <td><?= $dt["id_paket"] ?></td>
                                     <td><?= $dt["tgl_terima"] ?></td>
                                     <td><?= $dt["nama_paket"] ?></td>
                                     <td><?= $dt["hp"] ?></td>

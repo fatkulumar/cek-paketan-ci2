@@ -18,6 +18,7 @@
                         <table id="table_resi_user" class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>Kode</th>
                                     <th>Tanggal Terima</th>
                                     <th>Nama</th>
                                     <th>HP</th>
@@ -31,6 +32,7 @@
                             <tbody>
                             <?php foreach($data_asc as $dt): ?>
                                 <tr>
+                                    <td><?= $dt["id_paket"] ?></td>
                                     <td><?= $dt["tgl_terima"] ?></td>
                                     <td><?= $dt["nama_paket"] ?></td>
                                     <td><?= $dt["hp"] ?></td>
@@ -68,6 +70,7 @@
 
 
     <script>
+    var site_url = "<?php echo site_url()?>";
     var table_resi_detail_user = $('#table_resi_user').DataTable(
         {
         "processing": true, //Feature control the processing indicator.
@@ -76,7 +79,7 @@
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": site_url = "http://"+ window.location.host +"/cek-paketan-ci/user/ajax_list",
+            "url": site_url =  site_url +"/user/ajax_list",
             "type": "POST"
         },
  
